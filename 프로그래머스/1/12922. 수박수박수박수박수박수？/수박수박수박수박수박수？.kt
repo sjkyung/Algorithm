@@ -1,14 +1,8 @@
 class Solution {
     fun solution(n: Int): String {
-        var answer = ""
-        for(i in 1..n){
-            if(i % 2 == 0){
-                answer += "박"
-            }else if( i % 2 != 0){
-                answer += "수"
-            }
-        }
+        var answer = (1..n).joinToString(""){if (it % 2 == 0) "박" else "수"}
+     
         
-        return answer
+        return answer 
     }
 }
