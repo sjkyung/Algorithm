@@ -1,24 +1,14 @@
--- 코드를 작성해주세요
-WITH ParentChild AS (
-    SELECT
-        child.ID AS child_id,
-        child.GENOTYPE AS child_genotype,
-        parent.ID AS parent_id,
-        parent.GENOTYPE AS parent_genotype
-    FROM
-        ECOLI_DATA child
-    JOIN
-        ECOLI_DATA parent
-    ON
-        child.PARENT_ID = parent.ID
-)
-SELECT
-    child_id AS ID,
-    child_genotype AS GENOTYPE,
-    parent_genotype AS PARENT_GENOTYPE
+SELECT   
+      ED.ID,
+      ED.GENOTYPE,
+      ED2.GENOTYPE AS PARENT_GENOTYPE
 FROM
-    ParentChild
+      ECOLI_DATA ED
+INNER JOIN
+      ECOLI_DATA ED2
+ON
+      ED2.ID = ED.PARENT_ID
 WHERE
-    (child_genotype & parent_genotype) = parent_genotype
+      ED.GENOTYPE & ED2.GENOTYPE = ED2.GENOTYPE
 ORDER BY
-    child_id;
+      ED.ID ASC
